@@ -1,0 +1,6 @@
+CLIENT_ID = '227ZFL'
+CLIENT_SECRET = '2fc5d3d02f9fc9e5642fb4abc322a7e2'
+DATABASE = 'fitbit'
+HOST = '127.0.0.1'
+USER = 'root'
+PASSWD = 'apmsetup'
