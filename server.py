@@ -19,6 +19,7 @@ class fitbit(object):
 		try:
 			cl = cherrypy.request.headers['Content-Length']
 			rawbody = cherrypy.request.body.read(int(cl))
+			print rawbody
 			body = json.loads(rawbody)
 			key = body['key']
 			for i in range(len(body['data'])):
