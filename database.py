@@ -21,6 +21,7 @@ class User(Model):
 	token_type = TextField()
 	user_id = TextField()
 	key = TextField()
+	created_time = TimestampField()
 	class Meta:
 		database = db
 
@@ -155,3 +156,10 @@ def delete_user_info(user_id=None, key=None):
 		return result
 	except Exception, e:
 		return {'success':False, 'error_type':str(e)}
+
+def get_user_token_by_key(key):
+	try :
+		result = select_user(key=key)
+		return result['access_token']
+	except Exception, e:
+		return "Failed"

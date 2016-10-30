@@ -2,6 +2,7 @@ import requests
 import simplejson as json
 import time
 import hmac
+import database as db
 
 url = 'https://api.fitbit.com/oauth2/token'
 headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'Basic MjI3WkZMOmQyZDI3NjBmZWZiOTU0ZGVjZTZhNDI3OTk1OTRiYjYw'}
@@ -29,3 +30,8 @@ def make_key(user_id):
     timestamp = int(time.time())
     key = hmac.new(str(user_id)+str(timestamp)).hexdigest()
     return key
+
+def is_token_expired(key):
+    access_code = db.get_user_token_by_key(key)
+    if access_code == "Failed" :
+        print "Error occured to get access_code"

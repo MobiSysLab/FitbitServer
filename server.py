@@ -11,28 +11,32 @@ import urllib
 import authorization as auth
 
 class fitbit(object):
+	interval = 1;
 	@cherrypy.expose
 	def index(self):
 		return "HELLO WORLD!<br>CONTACT : hariprocessor at gmail dot com"
 	@cherrypy.expose
 	def gps(self):
+		print "in GPS function"
+		cherrypy.log()
 		try:
 			cl = cherrypy.request.headers['Content-Length']
 			rawbody = cherrypy.request.body.read(int(cl))
-			print rawbody
+			print "this is raw body : " + rawbody
 			body = json.loads(rawbody)
 			key = body['key']
-			for i in range(len(body['data'])):
-				latitude = float(body['data'][i]['latitude'])
-				longitude = float(body['data'][i]['longitude'])
-				timestamp = float(body['data'][i]['timestamp'])
-				success = db.insert_gps(key=key, latitude=latitude, longitude=longitude, timestamp=timestamp)
-				if not success['success']:
-					print success['error_type']
-					return json.dumps({'success':'false'})
+
+			latitude = float(body['data']['latitude'])
+			longitude = float(body['data']['longitude'])
+			timestamp = float(body['data']['timestamp'])
+			success = db.insert_gps(key=key, latitude=latitude, longitude=longitude, timestamp=timestamp)
+
+			if not success['success']:
+				print success['error_type']
+				return json.dumps({'success':'false'})
 			return json.dumps({'success':'true'})
 		except Exception, e:
-			print e
+			print "in exception"
 			return json.dumps({'success':'false'})
 
 	# @cherrypy.expose
