@@ -21,6 +21,7 @@ class User(Model):
     token_type = TextField()
     user_id = TextField()
     key = TextField()
+    created_time = TimestampField()
     class Meta:
         database = db
 

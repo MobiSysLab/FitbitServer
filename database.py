@@ -1,6 +1,7 @@
 import cherrypy
 from peewee import *
 import datetime
+import time
 import variables as v
 
 db = MySQLDatabase(v.DATABASE,host=v.HOST,port=3306, user=v.USER, passwd=v.PASSWD)
@@ -65,7 +66,7 @@ def insert_user(access_token, expires_in, refresh_token, scope, token_type, user
 		print 'query'
 		print query
 		if query['count']==0:
-			User.insert(access_token=access_token, expires_in=expires_in, refresh_token=refresh_token, scope=scope, token_type=token_type, user_id=user_id, key=key).execute()
+			User.insert(access_token=access_token, expires_in=expires_in, refresh_token=refresh_token, scope=scope, token_type=token_type, user_id=user_id, key=key, created_time=int(time.time())).execute()
 			return {'success':True, 'exists':False}
 		# update user
 		elif query['count']==1:

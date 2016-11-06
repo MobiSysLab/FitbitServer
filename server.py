@@ -11,10 +11,10 @@ import urllib
 import authorization as auth
 
 class fitbit(object):
-	interval = 1;
 	@cherrypy.expose
 	def index(self):
 		return "HELLO WORLD!<br>CONTACT : hariprocessor at gmail dot com"
+
 	@cherrypy.expose
 	def gps(self):
 		print "in GPS function"

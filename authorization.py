@@ -35,3 +35,5 @@ def is_token_expired(key):
     access_code = db.get_user_token_by_key(key)
     if access_code == "Failed" :
         print "Error occured to get access_code"
+    else :
+        
